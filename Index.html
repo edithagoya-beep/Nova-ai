@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA AI</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#071426;
+color:white;
+}
+header{
+padding:20px;
+background:#10294b;
+display:flex;
+align-items:center;
+gap:12px;
+}
+.logo{
+width:45px;height:45px;
+border-radius:50%;
+background:#168bff;
+display:grid;place-items:center;
+font-size:25px;font-weight:bold;
+}
+header h2{margin:0;color:#58b5ff}
+main{
+max-width:650px;
+margin:auto;
+padding:20px;
+}
+.welcome{
+text-align:center;
+padding:35px 10px;
+}
+.welcome h1{font-size:35px;color:#58b5ff}
+.welcome p{color:#b8c9dd}
+button{
+background:#168bff;
+color:white;border:0;
+padding:13px 20px;
+border-radius:10px;
+font-weight:bold;
+}
+#chat{
+display:none;
+}
+#messages{
+height:55vh;
+overflow-y:auto;
+padding:10px;
+}
+.message{
+padding:12px;
+margin:10px 0;
+border-radius:12px;
+background:#142b48;
+line-height:1.5;
+}
+.user{background:#14558b}
+.input-area{
+display:flex;
+gap:8px;
+}
+input{
+flex:1;min-width:0;
+padding:14px;
+border-radius:10px;
+border:1px solid #315477;
+background:#10243d;
+color:white;
+}
+.small{
+color:#91a9c5;
+font-size:12px;
+text-align:center;
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">N</div>
+<h2>NOVA AI</h2>
+</header>
+
+<main>
+<section class="welcome" id="welcome">
+<h1>WELCOME TO NOVA AI</h1>
+<p>Your ideas. Your world. Your AI.</p>
+<p>A new world of intelligence begins here.</p>
+<button onclick="startChat()">START CHAT</button>
+</section>
+
+<section id="chat">
+<h2>Chat with NOVA AI</h2>
+<div id="messages">
+<div class="message">
+Hello! I am NOVA AI. What would you like to explore today?
+</div>
+</div>
+<div class="input-area">
+<input id="question" placeholder="Ask NOVA AI anything...">
+<button onclick="sendMessage()">SEND</button>
+</div>
+<p class="small">NOVA AI prototype</p>
+</section>
+</main>
+
+<script>
+function startChat(){
+document.getElementById("welcome").style.display="none";
+document.getElementById("chat").style.display="block";
+}
+
+function sendMessage(){
+let input=document.getElementById("question");
+let value=input.value.trim();
+if(!value)return;
+
+let messages=document.getElementById("messages");
+
+let user=document.createElement("div");
+user.className="message user";
+user.textContent=value;
+messages.appendChild(user);
+
+let reply=document.createElement("div");
+reply.className="message";
+reply.textContent="Thanks for your message! NOVA AI is currently in prototype mode. Real AI responses will be connected through a secure AI backend in the next development stage.";
+messages.appendChild(reply);
+
+input.value="";
+messages.scrollTop=messages.scrollHeight;
+}
+</script>
+
+</body>
+  </html>
+  
