@@ -7,10 +7,12 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "20kb" }));
 
+// NOVA AI home connection
 app.get("/", (req, res) => {
   res.send("NOVA AI server is running!");
 });
 
+// NOVA AI chat
 app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
@@ -39,7 +41,8 @@ app.post("/chat", async (req, res) => {
         },
         body: JSON.stringify({
           model: process.env.OPENAI_MODEL || "gpt-6-luna",
-          instructions: "You are NOVA AI, a friendly, helpful and intelligent AI assistant.",
+          instructions:
+            "You are NOVA AI, a friendly, intelligent and helpful AI assistant. Help users clearly and respectfully.",
           input: message
         })
       }
@@ -48,9 +51,9 @@ app.post("/chat", async (req, res) => {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("OpenAI error:", data);
+      console.error("AI provider error:", data);
       return res.status(502).json({
-        error: "NOVA AI could not get a response. Please try again."
+        error: "NOVA AI could not respond. Please try again."
       });
     }
 
@@ -61,20 +64,23 @@ app.post("/chat", async (req, res) => {
       .join("\n");
 
     res.json({
-      reply: reply || "I couldn't generate a response. Please try again."
+      reply: reply || "Please try sending your message again."
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("NOVA AI error:", error);
+
     res.status(500).json({
       error: "Something went wrong. Please try again."
     });
   }
 });
 
+// Start server
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("NOVA AI server is running!");
 });
+  
       
